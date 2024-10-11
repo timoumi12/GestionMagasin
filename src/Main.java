@@ -1,5 +1,4 @@
-import models.Magasinne;
-import models.Produit;
+import models.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -81,5 +80,37 @@ public class Main {
         } else {
             System.out.println("Les deux magasins ont le même nombre de produits.");
         }
+
+        Magasinne carrefourMagasin = new Magasinne(1, "Carrefour", "Centre-Ville", 100);
+        Magasinne monoprixMagasin = new Magasinne(2, "Monoprix", "Menzah 6", 150);
+
+        // Ajout des employés au magasin Carrefour
+        carrefourMagasin.ajouterEmploye(new Caissier(1, "Ali", "Rue 1", 190, 1));
+        carrefourMagasin.ajouterEmploye(new Vendeur(2, "Sara", "Rue 2", 160, 0.85));
+        carrefourMagasin.ajouterEmploye(new Responsable(3, "Karim", "Rue 3", 170, 200));
+
+        // Ajout des employés au magasin Monoprix
+        monoprixMagasin.ajouterEmploye(new Caissier(4, "Mourad", "Rue 4", 175, 2));
+        monoprixMagasin.ajouterEmploye(new Vendeur(5, "Yasmine", "Rue 5", 160, 0.75));
+        monoprixMagasin.ajouterEmploye(new Vendeur(6, "Nadia", "Rue 6", 150, 0.80));
+        monoprixMagasin.ajouterEmploye(new Responsable(7, "Fares", "Rue 7", 200, 300));
+
+        // Affichage des caractéristiques des magasins
+        carrefourMagasin.afficherCaracteristiques();
+        monoprixMagasin.afficherCaracteristiques();
+
+        // Calcul et affichage des salaires
+        System.out.println("\nSalaires des employés du magasin Carrefour:");
+        carrefourMagasin.afficherSalairesEmployes();
+
+        System.out.println("\nSalaires des employés du magasin Monoprix:");
+        monoprixMagasin.afficherSalairesEmployes();
+
+        // Affichage des primes des responsables
+        System.out.println("\nPrimes des responsables du magasin Carrefour:");
+        carrefourMagasin.afficherPrimesResponsables();
+
+        System.out.println("\nPrimes des responsables du magasin Monoprix:");
+        monoprixMagasin.afficherPrimesResponsables();
     }
 }

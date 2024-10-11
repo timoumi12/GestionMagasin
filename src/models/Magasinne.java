@@ -10,6 +10,10 @@ public class Magasinne {
     private static int nombreTotalProduits = 0;
     private static int nombreMagasins = 0;
 
+    private String nom;
+    private Employe[] employes;
+    private int nombreEmployes;
+
     public Magasinne(int id, String adresse, int capacite) {
         this.id = id;
         this.adresse = adresse;
@@ -27,18 +31,6 @@ public class Magasinne {
             return true;
         }
         return false;
-    }
-
-    public void afficherCaracteristiques() {
-        System.out.println("Magasinne{" +
-                "id=" + id +
-                ", adresse='" + adresse + '\'' +
-                ", capacite=" + capacite +
-                '}');
-        System.out.println("Produits:");
-        for (int i = 0; i < nombreProduits; i++) {
-            System.out.println("- " + produits[i].getLibelle() + " : " + produits[i].getPrix());
-        }
     }
 
     public static int getNombreTotalProduits() {
@@ -85,6 +77,63 @@ public class Magasinne {
         } else {
             System.out.println("Les deux magasins ont le même nombre de produits.");
             return null; // Retourne null si les deux ont le même nombre de produits
+        }
+    }
+
+    public Magasinne(int id, String nom, String adresse, int capacite) {
+        this.id = id;
+        this.nom = nom;
+        this.adresse = adresse;
+        this.capacite = capacite;
+        this.produits = new Produit[50];
+        this.nombreProduits = 0;
+        this.employes = new Employe[20];
+        this.nombreEmployes = 0;
+        nombreMagasins++;
+    }
+
+    // Méthode pour ajouter un employé
+    public boolean ajouterEmploye(Employe employe) {
+        if (nombreEmployes < employes.length) {
+            employes[nombreEmployes] = employe;
+            nombreEmployes++;
+            return true;
+        }
+        return false;
+    }
+
+    public void afficherCaracteristiques() {
+        System.out.println("Magasinne{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", capacite=" + capacite +
+                '}');
+
+        System.out.println("Produits:");
+        for (int i = 0; i < nombreProduits; i++) {
+            System.out.println("- " + produits[i].getLibelle() + " : " + produits[i].getPrix());
+        }
+
+        System.out.println("Employés:");
+        for (int i = 0; i < nombreEmployes; i++) {
+            System.out.println(employes[i]);
+        }
+    }
+
+    // Méthode pour afficher les salaires des employés
+    public void afficherSalairesEmployes() {
+        for (int i = 0; i < nombreEmployes; i++) {
+            System.out.println("Salaire de " + employes[i].nom + " : " + employes[i].calculerSalaire() + " DT");
+        }
+    }
+
+    // Méthode pour afficher les primes des responsables
+    public void afficherPrimesResponsables() {
+        for (int i = 0; i < nombreEmployes; i++) {
+            if (employes[i] instanceof Responsable) {
+                System.out.println("Prime de " + employes[i].nom + " : " + ((Responsable) employes[i]).getPrime() + " DT");
+            }
         }
     }
 
