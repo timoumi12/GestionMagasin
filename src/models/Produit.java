@@ -7,7 +7,7 @@ public class Produit {
     private String marque;
     private double prix;
 
-    public Produit(int id, String libelle, String marque, double prix) {
+    public Produit(int id, String libelle, String marque, double prix) throws PrixNegatifException {
         this.id = id;
         this.libelle = libelle;
         this.marque = marque;
@@ -30,10 +30,11 @@ public class Produit {
         return prix;
     }
 
-    public void setPrix(double prix) {
-        if (prix >= 0) {
-            this.prix = prix;
-        }  
+    public void setPrix(double prix) throws PrixNegatifException {
+        if (prix < 0) {
+            throw new PrixNegatifException("Le prix ne peut pas être négatif.");
+        }
+        this.prix = prix;
     }
 
     @Override

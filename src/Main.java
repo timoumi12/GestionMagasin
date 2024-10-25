@@ -3,7 +3,7 @@ import models.*;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PrixNegatifException, MagasinPleinException {
         Magasinne magasin1 = new Magasinne(1, "Rue de la République", 100);
         Magasinne magasin2 = new Magasinne(2, "Avenue Habib Bourguiba", 150);
 
@@ -112,5 +112,24 @@ public class Main {
 
         System.out.println("\nPrimes des responsables du magasin Monoprix:");
         monoprixMagasin.afficherPrimesResponsables();
+
+        System.out.println("\n###################################\n");
+
+        try {
+            // Création d'un magasin
+            Magasinne carrefourMagasin_ = new Magasinne(1, "Carrefour", "Centre-Ville", 100);
+
+            // Ajout de produits
+            carrefourMagasin_.ajouterProduit(new Produit(1, "Lait", "Délice", 1.2));
+            carrefourMagasin_.ajouterProduit(new Produit(2, "Yaourt", "Vitalait", 0.5));
+
+            // Tentative d'ajout d'un troisième produit
+            carrefourMagasin_.ajouterProduit(new Produit(3, "Tomate", "Sicam", 1.8)); // This should throw an exception
+
+        } catch (MagasinPleinException e) {
+            System.out.println("Erreur: " + e.getMessage());
+        } catch (PrixNegatifException e) {
+            System.out.println("Erreur: " + e.getMessage());
+        }
     }
 }

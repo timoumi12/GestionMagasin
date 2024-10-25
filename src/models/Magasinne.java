@@ -18,19 +18,18 @@ public class Magasinne {
         this.id = id;
         this.adresse = adresse;
         this.capacite = capacite;
-        this.produits = new Produit[50];
+        this.produits = new Produit[2]; // Size set to 2
         this.nombreProduits = 0;
         nombreMagasins++;
     }
 
-    public boolean ajouterProduit(Produit produit) {
-        if (nombreProduits < produits.length) {
-            produits[nombreProduits] = produit;
-            nombreProduits++;
-            nombreTotalProduits++;
-            return true;
+    public void ajouterProduit(Produit produit) throws MagasinPleinException {
+        if (nombreProduits >= produits.length) {
+            throw new MagasinPleinException("Le magasin est plein, impossible d'ajouter le produit.");
         }
-        return false;
+        produits[nombreProduits] = produit;
+        nombreProduits++;
+        nombreTotalProduits++;
     }
 
     public static int getNombreTotalProduits() {
